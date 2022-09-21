@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'consultas/:nome/:disponivel',
+    loadChildren: () => import('./consultas/consultas.module').then( m => m.ConsultasPageModule)
+  },
+  {
+    path: 'confirma-agendamento/:nome/:consulta',
+    loadChildren: () => import('./confirma-agendamento/confirma-agendamento.module').then( m => m.ConfirmaAgendamentoPageModule)
+  },
 ];
 
 @NgModule({

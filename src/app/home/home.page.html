@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      Médicos cadastrados
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list>
+    
+    <ion-item *ngIf="medicos.length < 1">
+      <ion-label color="danger">Não há médicos cadastrados!</ion-label>
+    </ion-item>
+    
+    <ion-item-sliding *ngFor="let medico of medicos" >
+    <ion-item (click)="navigateAgendamento(medico.nome, medico.disponivel)">
+      <ion-label>
+        <h2>{{medico.nome}}</h2>
+      </ion-label>
+      <ion-icon *ngIf="medico.disponivel == true" name="checkmark-outline" color="success"></ion-icon>
+    </ion-item>
+    <ion-item-options side="start">
+      <ion-item-option color="danger" (click)="removeMedico(medico.nome)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+        
+    </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="adicionaMedico()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  </ion-content>
