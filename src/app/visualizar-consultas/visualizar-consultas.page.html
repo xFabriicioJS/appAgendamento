@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button>
+        </ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Visualizando consultas do médico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <div style="width: 150px; margin: 0 auto; box-shadow: 2px; ">
+        <ion-img src={{imgUrl}} width="2" height="2" style="border-radius: 10px;"></ion-img>
+      </div>
+   
+    </ion-card-content>
+    <ion-card-header>
+      <ion-card-subtitle>Médico especialista</ion-card-subtitle>
+      <ion-card-title>Dr. {{nome}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Um médico especialista do SENAC Itaquera.
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card class="ion-padding">
+    <ion-card-heading>Consultas por nome do paciente</ion-card-heading>
+    <br>
+    <ion-list>
+
+      <ion-item *ngIf="consultas.length < 1">
+        <br>
+        <h5 color="primary">Esse médico atualmente não possui consultas pendentes!</h5>
+      </ion-item>
+  
+      <ion-item *ngFor="let consulta of consultas" (click)="setOpen(true)">
+       {{consulta.nome}}
+       <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar color="secondary">
+              <ion-title>Informações da consulta</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen(false)">Fechar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+           <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle>Nome do paciente</ion-card-subtitle>
+              <ion-card-title>{{consulta.nome}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-text>
+                <h2>Motivação da consulta:</h2>
+                <p>{{consulta.motivo}}</p>
+              </ion-text>
+              <ion-text>
+                <h2>Data agendada:</h2>
+                <p>{{consulta.data.substring(0,10).replaceAll('-', '/')}}</p>
+              </ion-text>
+              <ion-text>
+                <h2>Hora agendada:</h2>
+                <p>{{consulta.data.substring(10)}}</p>
+              </ion-text>
+              <ion-text>
+                <h2>Especialidade:</h2>
+                <p>{{consulta.especialidade}}</p>
+              </ion-text>
+            </ion-card-content>
+          </ion-card>
+          <ion-card>
+
+            <ion-img src="../../assets/images/senac.jpg"></ion-img>
+          
+            
+            <ion-card-content>
+              <ion-item>
+                <ion-icon name="pin" slot="start" style="margin-left: -30px;"></ion-icon>
+                <ion-label>Localização</ion-label>
+              </ion-item>
+              <br>
+              <ion-text>Av. Itaquera, 8266 - Vila Carmosina, São Paulo - SP, 08295-000</ion-text>
+           
+            </ion-card-content>
+          </ion-card>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+       
+      </ion-item>
+  
+      
+    </ion-list>
+  
+  </ion-card>
+ <ion-button expand="block" fill="outline" (click)="onClick(navigateInicio())">
+  Voltar ao início
+ </ion-button>
+
+</ion-content>

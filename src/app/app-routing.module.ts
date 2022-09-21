@@ -12,12 +12,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'consultas/:nome/:disponivel',
+    path: 'consultas/:id',
     loadChildren: () => import('./consultas/consultas.module').then( m => m.ConsultasPageModule)
   },
   {
-    path: 'confirma-agendamento/:nome/:consulta',
+    path: 'confirma-agendamento/:nome/:idMedico/:data/:especialidade/:motivo',
     loadChildren: () => import('./confirma-agendamento/confirma-agendamento.module').then( m => m.ConfirmaAgendamentoPageModule)
+  },
+  {
+    path: 'visualizar-consultas/:id',
+    loadChildren: () => import('./visualizar-consultas/visualizar-consultas.module').then( m => m.VisualizarConsultasPageModule)
   },
 ];
 

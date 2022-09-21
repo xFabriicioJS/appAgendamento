@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -10,15 +10,21 @@ import { ToastController } from '@ionic/angular';
 export class ConfirmaAgendamentoPage implements OnInit {
 
   nome: string;
-  consulta: string;
+  idMedico: number;
+  nomeMedico: string;
+  especialidade: string;
+  data : string;
 
 
   constructor(
     private actRoute: ActivatedRoute,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
 
   ) {
     this.presentToast();
+    
+
    }
 
 
@@ -26,7 +32,11 @@ export class ConfirmaAgendamentoPage implements OnInit {
   ngOnInit() {
     this.actRoute.params.subscribe((data:any)=>{
       this.nome = data.nome;
-      this.consulta = data.consulta;
+      this.idMedico = data.idMedico;
+      this.especialidade = data.especialidade;
+      this.data = data.data;
+      console.log(this.nome, this.idMedico, this.especialidade, this.data);
+      this.buscaMedicoPorId(this.idMedico);
     });
  
   }
@@ -41,5 +51,22 @@ export class ConfirmaAgendamentoPage implements OnInit {
 
     await toast.present();
   }
+
+  buscaMedicoPorId(id){
+    let medicos = localStorage.getItem('medicosDb');
+    if(medicos){
+      let medicosParse = JSON.parse(medicos);
+      let medico = medicosParse.find((medico:any)=>medico.id == id);
+      this.nomeMedico = medico.nome;
+
+      console.log(this.nomeMedico);
+    }
+    
+  }
+
+  navigateInicio(){
+    this.router.navigate(['/home']);
+  }
+
 
 }

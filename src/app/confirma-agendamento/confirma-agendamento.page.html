@@ -19,37 +19,48 @@
   
     <ion-card-content>
       <ion-text>
-        <h2>Consulta confirmada com:</h2>
+        <h2>Nome do paciente:</h2>
         <h4><b>{{nome}}</b></h4>
+      </ion-text>
+      <br>
+      <ion-text>
+        <h2>Consulta confirmada com o médico:</h2>
+        <h4><b>Dr. {{nomeMedico}}</b></h4>
       </ion-text>
       <br/>
       <ion-text>
         <h2>Especialidade da consulta:</h2>
-        <h4><b>{{consulta}}</b></h4>
+        <h4><b>{{especialidade}}</b></h4>
       </ion-text>
       <br/>
       <ion-text>
         <h2>Horário agendado:</h2>
-        <h4><b>15:00</b></h4>
+        <h4><b>{{data.substring(10)}}</b></h4>
+      </ion-text>
+      <br/>
+      <ion-text>
+        <h2>Dia agendado:</h2>
+        <h4><b>{{data.substring(0,10).replaceAll('-', '/')}}</b></h4>
       </ion-text>
     </ion-card-content>
   </ion-card>
-  <br/>
+
   <ion-card>
-    <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label>Localização</ion-label>
-    </ion-item>
+
+    <ion-img src="../../assets/images/senac.jpg"></ion-img>
+  
     
     <ion-card-content>
-      <ion-text>
-        <h2>Av. Itaquera 8266, São Paulo, SP, 08295-000</h2>
-
-      </ion-text>
-      
+      <ion-item >
+        <ion-icon name="pin" slot="start" style="margin-left: -30px;"></ion-icon>
+        <ion-label>Localização</ion-label>
+      </ion-item>
+      <br>
+      <ion-text>Av. Itaquera, 8266 - Vila Carmosina, São Paulo - SP, 08295-000</ion-text>
+   
     </ion-card-content>
   </ion-card>
-  <br/>
+
   <ion-card>
     <ion-item href="#" class="ion-activated">
       <ion-icon name="wifi" slot="start"></ion-icon>
@@ -66,4 +77,8 @@
       <ion-label>Ordem de chegada</ion-label>
     </ion-item>
   </ion-card>
+
+ <ion-button expand="block" fill="outline" (click)="onClick(navigateInicio())">
+  Voltar ao início
+ </ion-button>
 </ion-content>
